@@ -3,25 +3,33 @@
 using namespace std;
 
 int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
     int n,m;
     cin>>n>>m;
-    vector<int> tickets(n);
-    vector<int> arr(m);
 
+    multiset<int> tickets;
     for(int i=0;i<n;i++){
-        cin>>tickets[i];
+        int p;
+        cin>>p;
+        tickets.insert(p);
     }
 
     for(int i=0;i<m;i++){
-        cin>>arr[i];
+        int t;
+        cin>>t;
+
+        auto it = tickets.upper_bound(t);
+
+        if(it == tickets.begin()){
+            cout<<"-1"<<endl;
+        }
+        else{
+            --it;
+            cout<<*it<<endl;
+            tickets.erase(it);
+        }
     }
-
-    sort(begin(tickets), end(tickets));
-
-    //5 3
-    //5 3 7 8 5   -- > 3 5 5 7 8 ->use binary search (Upper bound)
-    //4 8 3
-
-    
     return 0;
 }
