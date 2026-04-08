@@ -24,15 +24,21 @@ int main(){
             if(is_valid(n,m,i,j-1)){
                 not_allowed.insert(grid[i][j-1]); //Left
             }
-            else if(is_valid(n,m,i-1,j)){
+            if(is_valid(n,m,i-1,j)){
                 not_allowed.insert(grid[i-1][j]);//Top
             }
+            bool filled = false;
             for(int k=0; k < 4 ;k++){
                 char t = 'A'+k;
 
                 if(not_allowed.find(t) == not_allowed.end()){
                     grid[i][j] = t;
+                    filled = true;
+                    break;
                 }
+            }
+            if(!filled){
+                cout<<"IMPOSSIBLE";
             }
         } 
     }
